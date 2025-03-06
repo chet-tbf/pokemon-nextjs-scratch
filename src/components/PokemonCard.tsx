@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Pokemon } from '../types/pokemon';
 
@@ -35,8 +35,10 @@ export default function PokemonCard({ pokemon }: PokemonCardProps) {
 	const cardBgColor = typeColors[primaryType] || typeColors.default;
 	const [isPlaying, setIsPlaying] = useState(false);
 
-	// Calculate a random HP between 50-150 for visual effect
-	const hp = Math.floor(Math.random() * 100) + 50;
+	// Calculate HP once and store in state
+	const [hp, setHp] = useState(() => {
+		return Math.floor(Math.random() * 100) + 50;
+	});
 
 	// Function to play the Pokémon's cry
 	const playPokemonCry = async () => {
